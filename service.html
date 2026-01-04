@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Envoyez vos informations</h1>
+
+    <label>Adresse de notre entrepôt en Chine :</label>
+    <textarea readonly id="adresse">
+广州省广州市越秀区广园西路219号客麦隆大厦5楼507 C 档 +8615917423907/+86 13427585708/+86 13711759751
+    </textarea>
+    <button onclick="copierAdresse()">Copier l'adresse</button>
+
+    <hr style="margin: 30px 0;">
+
+    <form onsubmit="envoyerFormulaire(); return false;">
+      <label>Nom complet :</label>
+      <input type="text" id="nom" placeholder="Nom et prénom" required>
+      <label for="number">Numero tel</label>
+      <input type="number"  id="number" placeholder="Numero"required style="width: 100%; height: 22px;">
+      <button type="submit">Envoyer</button>
+      <div class="success" id="messageEnvoye" style="display:none;">Données envoyées ✅</div>
+    </form>
+  </div>
+
+  <script>
+    function copierAdresse() {
+      const adresse = document.getElementById("adresse");
+      adresse.select();
+      document.execCommand("copy");
+      alert("Adresse copiée !");
+    }
+
+    function envoyerFormulaire() {
+      document.getElementById("messageEnvoye").style.display = "block";
+    }
+  </script>
+
+
+</body>
+<style>
+
+body{font-family: 'Segoe UI', sans-serif;
+      background-color: #f4f7fa;
+      padding: 30px;
+      color: #333;
+    }
+
+    h1 {
+      color: #0077cc;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    textarea {
+      width: 100%;
+      height: 80px;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #0077cc;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      margin-top: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+     border-radius: 5px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    .success {
+      color: green;
+      margin-top: 10px;
+    }
+  </style>
+</html>
