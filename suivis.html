@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+  <h2>🔍 Suivi de colis</h2>
+  <input type="text" id="trackingId" placeholder="Entrez votre numéro de suivi">
+  <button onclick="checkTracking()">Voir le statut</button>
+  <div class="result" id="resultBox"></div>
+</div>
+</body>
+
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #eef3f8;
+      padding: 0;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #006494;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      background: #006494;
+      color: white;
+      padding: 12px;
+      border: none;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background: #004a6f;
+    }
+
+    .result {
+      margin-top: 20px;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 5px;
+      display: none;
+    }
+  </style>
+
+  <script>
+  const colisDB = {
+    "KY123": {
+      client: "Jean K.",
+      status: "En transit vers Brazzaville",
+      date: "2026-01-06",
+      destination: "Brazzaville"
+    },
+    "KY456": {
+      client: "Amina D.",
+      status: "Livré à Kinshasa",
+      date: "2026-01-03",
+      destination: "Kinshasa"
+    }
+  };
+
+  function checkTracking() {
+    const trackingId = document.getElementById("trackingId").value.toUpperCase();
+    const resultBox = document.getElementById("resultBox");
+
+    if (colisDB[trackingId]) {
+      const data = colisDB[trackingId];
+      resultBox.style.display = "block";
+      resultBox.innerHTML = `
+        <strong>Numéro :</strong> trackingId<br>
+        <strong>Client :</strong>{data.client}<br>
+        <strong>Statut :</strong> data.status<br>
+        <strong>Date :</strong>{data.date}<br>
+        <strong>Destination :</strong> ${data.destination}
+      `;
+    } else {
+      resultBox.style.display = "block";
+      resultBox.innerHTML = "❌ Colis non trouvé. Vérifiez le numéro.";
+    }
+  }
+</script>
+</html>

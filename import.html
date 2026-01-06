@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+  <h1>🌍 Import / Export avec Kyara Express</h1>
+  <p>Nous transportons presque tous types d’articles en toute sécurité et légalité</p>
+</header>
+
+<div class="container">
+
+  <div class="section">
+    <h2>📦 Produits que vous pouvez importer</h2>
+    <button onclick="toggle('import')">Voir les détails</button>
+    <div class="info" id="import">
+      <ul>
+        <li>Vêtements, chaussures, sacs (neufs ou d'occasion)</li>
+        <li>Téléphones, ordinateurs, tablettes, accessoires</li>
+        <li>Cosmétiques : maquillages, soins, perruques</li>
+        <li>Appareils électroniques : TV, ventilateurs, petits électros</li>
+        <li>Accessoires auto & moto</li>
+        <li>Articles ménagers : mixeurs, lampes, ustensiles</li>
+        <li>Meubles démontés</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>📤 Produits que vous pouvez exporter</h2>
+    <button onclick="toggle('export')">Voir les détails</button>
+    <div class="info" id="export">
+      <ul>
+        <li>Produits artisanaux (tissus africains, objets en bois...)</li>
+        <li>Denrées non périssables (épices, café, produits secs)</li>
+        <li>Produits cosmétiques africains</li><li>Échantillons pour fournisseurs</li>
+        <li>Documents commerciaux ou personnels</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>🚫 Produits interdits</h2>
+    <button onclick="toggle('interdits')">Afficher la liste</button>
+    <div class="info" id="interdits">
+      <ul>
+        <li>Drogues, stupéfiants</li>
+        <li>Armes à feu, munitions</li>
+        <li>Produits explosifs ou inflammables</li>
+        <li>Contrefaçons ou objets illégaux</li>
+        <li>Animaux vivants</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>ℹ️ Informations complémentaires</h2>
+    <button onclick="toggle('infos')">Voir plus</button>
+    <div class="info" id="infos">
+      <p>Nous vous conseillons toujours avant expédition. Si vous avez un doute sur un produit, contactez notre équipe via WhatsApp ou téléphone. Nous vous aidons à identifier la catégorie douanière, les éventuelles restrictions ou taxes applicables.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f7fc;
+      color: #222;
+    }
+
+    header {
+      background-color: #045d75;
+      color: white;
+      padding: 25px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 30px;
+    }
+
+    .section {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #045d75;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #045d75;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .info {
+      display: none;
+      margin-top: 10px;
+      animation: fadeIn 0.4s ease-in-out;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    ul li::marker {
+      color: green;
+    }
+    </style>
+
+    <script>
+  function toggle(id) {
+    const section = document.getElementById(id);
+    section.style.display = section.style.display === "block" ? "none" : "block";
+  }
+</script>
+</html>
