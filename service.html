@@ -18,11 +18,12 @@
 
     <hr style="margin: 30px 0;">
 
-    <form onsubmit="envoyerFormulaire(); return false;">
-      <label>Nom complet :</label>
-      <input type="text" id="nom" placeholder="Nom et prénom" required>
-      <label for="number">Numero tel</label>
-      <input type="number"  id="number" placeholder="Numero"required style="width: 100%; height: 22px;">
+    <form   action="https://formspree.io/f/xdakrrpp"
+  method="POST">
+      <label>Your Email:</label>
+      <input type="email" id="email" placeholder="Email" name="Email" required style="width: 100%; height: 33px;"><br>
+      <label for="text">reçu colis</label>
+      <input type="text"  id="text" placeholder=" colis" name="colis"  required style="width: 100%; height: 60px;">
       <button type="submit">Envoyer</button>
       <div class="success" id="messageEnvoye" style="display:none;">Données envoyées ✅</div>
     </form>
