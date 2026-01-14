@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="sb_publishable_qttZ4AfZ13wfOe4UeudIkQ_30omA5SL"></script>
+    <title>Document</title>
+</head>
+<body>
+        <h2>Créer un compte</h2>
+  <form id="signup-form"><input type="email" id="signup-email" placeholder="Email" required>
+    <input type="password" id="signup-password" placeholder="Mot de passe" required>
+    <button type="submit">S'inscrire</button>
+  </form>
+
+  <h2>Connexion</h2>
+  <form id="login-form">
+    <input type="email" id="login-email" placeholder="Email" required>
+    <input type="password" id="login-password" placeholder="Mot de passe" required>
+    <button type="submit">Se connecter</button>
+  </form>
+
+  <div id="message" class="message"></div>
+</body>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f2f2f2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 300px;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    .message {
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+    <script>
+    const supabase = supabase.createClient('TON_URL', 'TA_CLÉ');
+
+    // Inscription
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const { user, error } = await supabase.auth.signUp({ email, password });
+      document.getElementById('message').textContent = error ? error.message : "Inscription réussie ! Vérifie ton mail.";
+    });
+
+    // Connexion
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;const password = document.getElementById('login-password').value;
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      document.getElementById('message').textContent = error ? error.message : "Connexion réussie !";
+    });
+  </script>
+</html>
