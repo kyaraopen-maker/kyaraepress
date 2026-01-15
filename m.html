@@ -1,0 +1,827 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ </head>
+ <body>
+    <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M Assurance - Mon Espace Client</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <span class="logo-m">M</span>
+                <span class="logo-text">Assurance</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li class="nav-item active" data-page="dashboard">
+                        <i class="fas fa-home"></i>
+                        <span>Tableau de bord</span>
+                    </li>
+                    <li class="nav-item" data-page="colis">
+                        <i class="fas fa-box"></i>
+                        <span>Mes Colis</span>
+                    </li>
+                    <li class="nav-item" data-page="declaration">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Déclarer un Sinistre</span>
+                    </li>
+                    <li class="nav-item" data-page="calculator">
+                        <i class="fas fa-calculator"></i>
+                        <span>Simulateur de Prime</span>
+                    </li>
+                    <li class="nav-item" data-page="contact">
+                        <i class="fas fa-headset"></i>
+                        <span>Contact & Support</span>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <p>&copy; 2024 M Assurance</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="app-header">
+                <div class="header-left">
+                    <h1 id="page-title">Tableau de bord</h1>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile">
+                        <a href="inscription.html" style="color: black; text-decoration: none;"><span class="user-name">s'inscrire</span></a>
+                        <div class="user-avatar"><i class="fas fa-user-circle"></i></div>
+                    </div>
+                </div>
+            </header>
+
+            <div id="dashboard-page" class="page-content active">
+                <section class="stats-grid">
+                    <div class="stat-card">
+                        <div class="icon-wrapper"><i class="fas fa-box-open"></i></div>
+                        <div class="details">
+                            <h3>Colis Assurés</h3>
+                            <p id="total-colis">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon-wrapper"><i class="fas fa-coins"></i></div>
+                        <div class="details">
+                            <h3>Solde du Compte</h3>
+                            <p id="account-balance">0 FCFA</p>
+                        </div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="icon-wrapper"><i class="fas fa-exclamation"></i></div>
+                        <div class="details">
+                            <h3>Sinistres en cours</h3>
+                            <p id="pending-claims">0</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="recent-colis">
+                    <h2>Vos Colis Récents</h2>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID Colis</th>
+                                    <th>Origine</th>
+                                    <th>Type Fret</th>
+                                    <th>Valeur</th>
+                                    <th>Statut</th>
+                                </tr>
+                            </thead>
+                            <tbody id="colis-table-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+
+            <div id="colis-page" class="page-content">
+                <h2>Tous Mes Colis</h2>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID Colis</th>
+                                <th>Origine</th>
+                                <th>Type Fret</th>
+                                <th>Valeur</th>
+                                <th>Statut</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="all-colis-table-body">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="declaration-page" class="page-content">
+                <h2>Déclarer un Sinistre</h2>
+                <div class="form-card">
+                    <p>En cas de perte ou dommage, veuillez remplir ce formulaire. Nos équipes vous contacteront sous 24h.</p>
+                    <div class="form-group">
+                        <label for="sinistre-colis-id">ID du Colis concerné:</label>
+                        <input type="text" id="sinistre-colis-id" placeholder="Ex: M-242-991" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="sinistre-description">Description du problème:</label>
+                        <textarea id="sinistre-description" rows="5" placeholder="Décrivez précisément ce qui est arrivé (perte, casse, etc.)"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sinistre-preuves">Joindre des preuves (photos, rapport douanier):</label>
+                        <input type="file" id="sinistre-preuves" multiple accept="image/*,.pdf">
+                    </div>
+                    <button class="btn-primary" onclick="submitSinistre()">Envoyer la déclaration</button>
+                </div>
+            </div>
+
+            <div id="calculator-page" class="page-content">
+                <h2>Simulateur de Prime d'Assurance</h2>
+                <div class="form-card">
+                    <p>Estimez le coût de votre assurance en quelques secondes. Taux standard : <strong>0.5% de la valeur déclarée</strong>.</p>
+                    <div class="form-group">
+                        <label for="calculator-value">Valeur déclarée de la marchandise (FCFA):</label>
+                        <input type="number" id="calculator-value" placeholder="Ex: 500000" oninput="calculateInsurance()">
+                    </div>
+                    <div class="result-box">
+                        <p>Prime estimée : <strong id="calculated-prime">0 FCFA</strong></p>
+                    </div>
+                    <button class="btn-secondary" onclick="requestQuote()">Demander une offre personnalisée</button>
+                </div>
+            </div>
+
+            <div id="contact-page" class="page-content">
+                <h2>Contact & Support</h2>
+                <div class="contact-grid">
+                    <div class="contact-card">
+                        <i class="fas fa-phone-alt"></i>
+                        <h3>Téléphone</h3>
+                        <p>+242 06 842 46 24</p>
+                        <a href="tel:+242068424624" class="btn-small">Appeler maintenant</a>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fab fa-whatsapp"></i>
+                        <h3>WhatsApp</h3>
+                        <p>Discutez avec nos experts</p>
+                        <a href="https://wa.me/242068424624?text=Bonjour%20M%20Assurance,%20je%20souhaite%20des%20informations%20sur%20vos%20services." target="_blank" class="btn-small">Envoyer un message</a>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Adresse</h3>
+                        <p>Brazzaville, Congo (sur rendez-vous)</p>
+                        <a href="#" class="btn-small">Voir sur la carte</a>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+ </body>
+ <style>
+    /* Variables CSS pour gérer facilement les couleurs */
+:root {
+    --bg-primary: #f8f9fa; /* Arrière-plan de l'application */
+    --sidebar-bg: #212529; /* Arrière-plan de la barre latérale */
+    --sidebar-item-hover: #343a40; /* Hover des éléments de la sidebar */
+    --brand-color: #007bff; /* Bleu M Assurance */
+    --brand-accent: #dc3545; /* Rouge pour les alertes/actions clés */
+    --text-color: #343a40;
+    --text-light: #6c757d;
+    --card-bg: #ffffff;
+    --border-color: #e9ecef;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+}
+
+/* Base Reset & Typography */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-primary);
+    line-height: 1.6;
+    display: flex; /* Utilisation de flexbox pour la disposition principale */
+    height: 100vh;
+    overflow: hidden; /* Empêche le défilement global */
+}
+
+a {
+    text-decoration: none;
+    color: var(--brand-color);
+}
+
+ul { list-style: none; }
+
+/* Global Buttons */
+.btn-primary, .btn-secondary, .btn-small {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary {
+    background-color: var(--brand-color);
+    color: var(--card-bg);
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border: 1px solid var(--brand-color);
+    color: var(--brand-color);
+}
+.btn-secondary:hover {
+    background-color: var(--brand-color);
+    color: var(--card-bg);
+}
+
+.btn-small {
+    padding: 8px 15px;
+    font-size: 0.85em;
+    background-color: #e9ecef;
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+.btn-small:hover {
+    background-color: #dee2e6;
+}
+
+/* App Layout */
+.app-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background-color: var(--sidebar-bg);
+    color: var(--card-bg);
+    padding: 25px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 10px var(--shadow-light);
+    flex-shrink: 0; /* Empêche la sidebar de rétrécir */
+}
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.sidebar .logo-m {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--brand-color);
+    margin-right: 10px;
+}
+
+.sidebar .logo-text {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.main-nav ul {
+    padding: 0 15px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-item:hover {
+    background-color: var(--sidebar-item-hover);
+}
+
+.nav-item.active {
+    background-color: var(--brand-color);
+    color: var(--card-bg);
+    font-weight: 500;
+}
+
+.nav-item i {
+    font-size: 1.2rem;
+    margin-right: 15px;
+    width: 20px; /* Assure un alignement parfait des icônes */
+    text-align: center;
+}
+
+.sidebar-footer {
+    text-align: center;
+    font-size: 0.8em;
+    color: var(--text-light);
+    padding: 20px;
+}
+
+/* Main Content Area */
+.main-content {
+    flex-grow: 1; /* Prend l'espace restant */
+    padding: 30px;
+    overflow-y: auto; /* Permet le défilement du contenu principal */
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: var(--card-bg);
+    padding: 20px 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.app-header h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+}
+
+.user-name {
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: var(--brand-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--card-bg);
+    font-size: 1.2rem;
+}
+
+/* Page Content - Hidden by default, shown by JS */
+.page-content {
+    display: none;
+    animation: fadeIn 0.5s ease-out; /* Animation douce à l'affichage */
+}
+.page-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adaptatif */
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-left: 5px solid var(--brand-color); /* Accent visuel */
+}
+
+.stat-card.danger {
+    border-left-color: var(--brand-accent);
+}
+
+.stat-card .icon-wrapper {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 123, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--brand-color);
+}
+
+.stat-card.danger .icon-wrapper {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: var(--brand-accent);
+}
+
+.stat-card .details h3 {
+    font-size: 0.9em;
+    color: var(--text-light);
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.stat-card .details p {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+/* Table Styles */
+.recent-colis, .full-table-section {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: var(--text-color);
+}
+
+.table-responsive {
+    overflow-x: auto; /* Permet le défilement horizontal sur petits écrans */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: separate; /* Pour les border-radius sur les cellules */
+    border-spacing: 0;
+    min-width: 600px; /* Pour éviter que le tableau ne soit trop petit */
+}
+
+.data-table th, .data-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th {
+    background-color: #f1f3f5;
+    color: var(--text-light);
+    font-size: 0.9em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 600;
+    text-align: center;
+    display: inline-block;
+}
+
+.status.covered { background-color: #d4edda; color: #28a745; } /* Vert */
+.status.intransit { background-color: #fff3cd; color: #ffc107; } /* Jaune */
+.status.delivered { background-color: #d1ecf1; color: #17a2b8; } /* Bleu clair */
+.status.pending { background-color: #f8d7da; color: #dc3545; } /* Rouge */
+
+/* Forms and Inputs */
+.form-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    max-width: 700px;
+    margin: 0 auto; /* Centrer le formulaire */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 1em;
+    color: var(--text-color);
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--brand-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+textarea {
+    resize: vertical; /* Permet le redimensionnement vertical */
+    min-height: 100px;
+}
+
+.result-box {
+    background-color: #e2f0fb;
+    border: 1px solid #cce5ff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+.result-box p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--brand-color);
+}
+
+/* Contact Page */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.contact-card {
+    background-color: var(--card-bg);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow-light);
+    text-align: center;
+    border-top: 5px solid var(--brand-color);
+}
+
+.contact-card i {
+    font-size: 2.5rem;
+    color: var(--brand-color);
+    margin-bottom: 15px;
+}
+
+.contact-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.contact-card p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 80px; /* Rétracte la sidebar sur petits écrans */
+        padding: 20px 0;
+    }
+    .sidebar .logo-text, .nav-item span {
+        display: none; /* Cache le texte pour économiser de l'espace */
+    }
+    .sidebar .logo-m {
+        margin-right: 0;
+    }
+    .nav-item {
+        justify-content: center; /* Centre les icônes */
+        padding: 15px 0;
+    }
+    .nav-item i {
+        margin-right: 0;
+    }
+    .app-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .main-content {
+        padding: 20px;
+    }
+    .stats-grid {
+        grid-template-columns: 1fr; /* Une colonne sur petits écrans */
+    }
+    .app-header h1 {
+        font-size: 1.5rem;
+    }
+}
+ </style>
+ <script>
+    // --- Données de simulation (pour le frontend uniquement) ---
+// En production, ces données viendraient d'une API backend après authentification.
+const userData = {
+    name: "M. Importateur",
+    balance: 150000, // Solde en FCFA
+    totalColis: 7,
+    pendingClaims: 1
+};
+
+const userColis = [
+    { id: "M-BZV-001", origin: "Guangzhou", type: "Aérien", value: 500000, status: "covered", action: "en attente" },
+    { id: "M-BZV-002", origin: "Yiwu", type: "Maritime", value: 1200000, status: "intransit", action: "Suivre" },
+    { id: "M-BZV-003", origin: "Shenzhen", type: "Aérien", value: 80000, status: "delivered", action: "Télécharger Certificat" },
+    { id: "M-BZV-004", origin: "Shanghai", type: "Aérien", value: 250000, status: "covered", action: "Voir Détails" },
+    { id: "M-BZV-005", origin: "Ningbo", type: "Maritime", value: 3000000, status: "intransit", action: "Suivre" },
+    { id: "M-BZV-006", origin: "Qingdao", type: "Aérien", value: 150000, status: "delivered", action: "Télécharger Certificat" },
+    { id: "M-BZV-007", origin: "Xiamen", type: "Maritime", value: 750000, status: "covered", action: "Voir Détails" }
+];
+
+// --- Fonctions utilitaires ---
+
+// Formatte un nombre en devise FCFA
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('fr-FR', {
+        style: 'currency',
+        currency: 'XAF', // Code ISO pour le Franc CFA d'Afrique Centrale
+        minimumFractionDigits: 0
+    }).format(amount).replace('XAF', 'FCFA'); // Remplacer le symbole XAF par FCFA
+}
+
+// Rend le statut en HTML avec la bonne couleur
+function renderStatus(status) {
+    let className = '';
+    let text = '';
+    switch (status) {
+        case 'covered': className = 'covered'; text = 'Couvert'; break;
+        case 'intransit': className = 'intransit'; text = 'En Transit'; break;
+        case 'delivered': className = 'delivered'; text = 'Livré'; break;
+        case 'pending': className = 'pending'; text = 'En Attente'; break;
+        default: className = 'default'; text = 'Inconnu'; break;
+    }
+    return `<span class="status ${className}">${text}</span>`;
+}
+
+// --- Gestion de la Navigation et de l'affichage des pages ---
+const navItems = document.querySelectorAll('.nav-item');
+const pageContents = document.querySelectorAll('.page-content');
+const pageTitleElement = document.getElementById('page-title');
+
+function showPage(pageId) {
+    // Masquer toutes les pages
+    pageContents.forEach(page => page.classList.remove('active'));
+    // Afficher la page demandée
+    const targetPage = document.getElementById(`${pageId}-page`);
+    if (targetPage) {
+        targetPage.classList.add('active');
+        // Mettre à jour le titre de l'en-tête
+        pageTitleElement.textContent = targetPage.querySelector('h2') ? targetPage.querySelector('h2').textContent : 'M Assurance';
+    }
+
+    // Mettre à jour l'état actif dans la navigation
+    navItems.forEach(item => {
+        if (item.dataset.page === pageId) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+
+    // Actions spécifiques au chargement de certaines pages
+    if (pageId === 'dashboard') {
+        loadDashboardData();
+    } else if (pageId === 'colis') {
+        loadAllColisData();
+    }
+}
+
+// Écouteurs d'événements pour la navigation
+navItems.forEach(item => {
+    item.addEventListener('click', () => {
+        showPage(item.dataset.page);
+    });
+});
+
+// --- Chargement des données du Tableau de Bord ---
+function loadDashboardData() {
+    document.getElementById('total-colis').textContent = userData.totalColis;
+    document.getElementById('account-balance').textContent = formatCurrency(userData.balance);
+    document.getElementById('pending-claims').textContent = userData.pendingClaims;
+
+    const tableBody = document.getElementById('colis-table-body');
+    tableBody.innerHTML = ''; // Nettoyer le tableau avant d'ajouter des données
+    // Afficher seulement les 3 derniers colis pour le tableau de bord
+    userColis.slice(0, 3).forEach(colis => {
+        const row = `
+            <tr>
+                <td>${colis.id}</td>
+                <td>${colis.origin}</td>
+                <td>${colis.type}</td>
+                <td>${formatCurrency(colis.value)}</td>
+                <td>${renderStatus(colis.status)}</td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+}
+
+// --- Chargement de tous les colis pour la page "Mes Colis" ---
+function loadAllColisData() {
+    const tableBody = document.getElementById('all-colis-table-body');
+    tableBody.innerHTML = '';
+    userColis.forEach(colis => {
+        const row = `
+            <tr>
+                <td>${colis.id}</td>
+                <td>${colis.origin}</td>
+                <td>${colis.type}</td>
+                <td>${formatCurrency(colis.value)}</td>
+                <td>${renderStatus(colis.status)}</td>
+                <td><button class="btn-small">${colis.action}</button></td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+}
+
+// --- Logique du Simulateur de Prime ---
+const insuranceRate = 0.005; // 0.5% de taux
+
+function calculateInsurance() {
+    const valueInput = document.getElementById('calculator-value');
+    const calculatedPrimeElement = document.getElementById('calculated-prime');
+    
+    let value = parseFloat(valueInput.value);
+
+    if (isNaN(value) || value <= 0) {
+        calculatedPrimeElement.textContent = "0 FCFA";
+        return;
+    }
+
+    const prime = value * insuranceRate;
+    calculatedPrimeElement.textContent = formatCurrency(prime);
+}
+
+function requestQuote() {
+    const value = document.getElementById('calculator-value').value;
+    const prime = document.getElementById('calculated-prime').textContent;
+    const whatsappNumber = "+242068424624"; // Ton numéro WhatsApp
+    
+    let message = `Bonjour M Assurance, je souhaite une offre personnalisée.%0A%0A- Valeur estimée de ma marchandise: ${value} FCFA%0A- Prime calculée: ${prime}%0A%0ARendez-vous pour finaliser mon assurance.`;
+    
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+}
+
+// --- Logique de Déclaration de Sinistre (simulée) ---
+function submitSinistre() {
+    const colisId = document.getElementById('sinistre-colis-id').value;
+    const description = document.getElementById('sinistre-description').value;
+    // const preuves = document.getElementById('sinistre-preuves').files; // Pourrait être envoyé à un backend
+
+    if (!colisId || !description) {
+        alert("Veuillez remplir l'ID du colis et la description du problème.");
+        return;
+    }
+
+    alert(`Déclaration de sinistre envoyée pour le colis ${colisId}. Description: "${description}". Nos équipes vous contacteront très bientôt.`);
+    // Réinitialiser le formulaire
+    // document.getElementById('sinistr
+}
+ </script>
+ </html>

